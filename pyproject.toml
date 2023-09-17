@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "fastapi-sse"
+version = "0.1.0"
+description = ""
+authors = ["Andrew Klyuchnikov <off-rey@bk.ru>"]
+readme = "README.md"
+packages = [{include = "fastapi_sse"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = {extras = ["all"], version = "^0.99.1"}
+sse-starlette = "^1.6.1"
+asyncio = "^3.4.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+

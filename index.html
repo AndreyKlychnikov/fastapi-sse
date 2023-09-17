@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Minimalistic SSE Frontend</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    h1 {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #333;
+      color: #fff;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Server-Sent Events</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Event ID</th>
+        <th>Message</th>
+        <th>Date & Time</th>
+      </tr>
+    </thead>
+    <tbody id="data-list"></tbody>
+  </table>
+
+  <script>
+    const dataList = document.getElementById('data-list');
+    const eventSource = new EventSource('/stream');
+    eventSource.addEventListener('new_message', event => {
+      const { message, datetime } = JSON.parse(event.data);
+      const row = document.createElement('tr');
+      row.innerHTML = `<td>${event.lastEventId}</td><td>${message}</td><td>${datetime}</td>`;
+      dataList.appendChild(row);
+    });
+  </script>
+</body>
+</html>
